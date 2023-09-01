@@ -1,11 +1,4 @@
-<ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>
-     <div id="titulo">Menu de ingreso</div>
-     
-    </ion-title>
-  </ion-toolbar>
-</ion-header>
+
 
 <ion-content [fullscreen]="true">
   <ion-header collapse="condense">
@@ -40,11 +33,10 @@
         </ion-item>
         <ion-button (click)="mostrarConsola()" size="small" shape="round">Conectar</ion-button><br>
           <br>
-        
+          <ion-button [routerLink]="['/registrarse']" shape="round" size="small">
+            Registrarse
+          </ion-button>
       </ion-list>
-      <ion-button id="open-modal" shape="round" size="small">
-        Registrarse
-      </ion-button><br>
     </ion-card-content>
   </ion-card>
 </ion-content>

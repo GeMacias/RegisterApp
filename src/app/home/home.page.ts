@@ -8,7 +8,7 @@ import { Router, NavigationExtras } from '@angular/router';
 })
 export class HomePage {
 
-  constructor() {}
+  constructor(private router:Router) {}
   public mensaje = ""
 
   user = {
@@ -16,6 +16,16 @@ export class HomePage {
     password: ""
   }
 
+  enviarInformacion() {
+    if (this.user.correo != "") {
+      let navigationExtras: NavigationExtras = {
+        state: { user: this.user }
+      }
+      this.router.navigate(['/registrarse'], navigationExtras);
+    } else {
+      this.mensaje = "Debe ingresar sus credenciales";
+    }
+  }
 
   mostrarConsola() {
     console.log(this.user);
