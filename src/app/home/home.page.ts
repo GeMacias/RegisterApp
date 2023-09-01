@@ -8,5 +8,19 @@ import { Component } from '@angular/core';
 export class HomePage {
 
   constructor() {}
+  public mensaje = ""
 
+  user = {
+    correo: "",
+    password: ""
+  }
+  
+  mostrarConsola() {
+    console.log(this.user);
+    if (this.user.correo != "" && this.user.password != "") {
+      this.mensaje = "Usuario Conectado";
+    } else {
+      this.mensaje = "Usuario y contraseña deben tener algun valor"
+    }
+  }
 }
