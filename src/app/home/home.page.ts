@@ -12,12 +12,12 @@ export class HomePage {
   public mensaje = ""
 
   user = {
-    correo: "",
+    username: "",
     password: ""
   }
 
   enviarInformacion() {
-    if (this.user.correo != "") {
+    if (this.user.username != "") {
       let navigationExtras: NavigationExtras = {
         state: { user: this.user }
       }
@@ -29,10 +29,6 @@ export class HomePage {
 
   mostrarConsola() {
     console.log(this.user);
-    if (this.user.correo != "" && this.user.password != "") {
-      this.mensaje = "Usuario Conectado";
-    } else {
-      this.mensaje = "Usuario y contraseña deben tener algun valor"
-    }
+    
   }
 }

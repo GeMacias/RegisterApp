@@ -1,20 +1,11 @@
 
 
 <ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">Blank</ion-title>
-    </ion-toolbar>
-  </ion-header>
-  <br><br>
+  <br><br><br>
   <div id="logo">
-    <ion-avatar id="avatar" #avatar>
-      <img alt="Silhouette of a person's head"
-      src="https://i1.sndcdn.com/avatars-000056916739-swznj5-t500x500.jpg" />
-    </ion-avatar>
-    <h1></h1>
+    <img src="assets/img/Logo_DuocUC.png" id="avatar">
   </div>
-  <br>
+  <br><br><br>
   <ion-card>  
     <ion-card-header>
       <ion-card-title>Credenciales</ion-card-title>
@@ -23,8 +14,8 @@
       <ion-list>
 
         <ion-item>
-          <ion-input [(ngModel)]="user.correo" label="Correo " labelPlacement="floating"
-          placeholder="Ingrese su correo"></ion-input>
+          <ion-input [(ngModel)]="user.username" label="Nombre de Usuario" labelPlacement="floating"
+          placeholder="Ingrese su Nombre de Usuario"></ion-input>
         </ion-item>
         <ion-item>
           <ion-input [(ngModel)]="user.password" label="Contraseña" type="password" labelPlacement="floating"
