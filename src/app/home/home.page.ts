@@ -9,26 +9,27 @@ import { Router, NavigationExtras } from '@angular/router';
 export class HomePage {
 
   constructor(private router:Router) {}
-  public mensaje = ""
+  public mensaje = "Hola soy el nuevo mensaje :3"
 
   user = {
-    username: "",
+    usuario: "",
     password: ""
   }
 
+
   enviarInformacion() {
-    if (this.user.username != "") {
-      let navigationExtras: NavigationExtras = {
-        state: { user: this.user }
-      }
-      this.router.navigate(['/registrarse'], navigationExtras);
+    let navigationExtras: NavigationExtras = {
+      state: { user: this.user }
+    }
+    this.router.navigate(['/registrarse'], navigationExtras);
+  }
+  mostrarConsola() {
+    console.log(this.user);
+    if (this.user.usuario != "" && this.user.password != "") {
+      this.mensaje = "Usuario Conectado";
     } else {
-      this.mensaje = "Debe ingresar sus credenciales";
+      this.mensaje = "Usuario y contraseña deben tener algun valor"
     }
   }
 
-  mostrarConsola() {
-    console.log(this.user);
-    
-  }
 }

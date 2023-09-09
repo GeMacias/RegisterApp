@@ -14,19 +14,23 @@
       <ion-list>
 
         <ion-item>
-          <ion-input [(ngModel)]="user.username" label="Nombre de Usuario" labelPlacement="floating"
-          placeholder="Ingrese su Nombre de Usuario"></ion-input>
+          <ion-input [(ngModel)]="user.usuario" label="Nombre Usuario" labelPlacement="floating"
+            placeholder="Ingrese su Usuario"></ion-input>
         </ion-item>
         <ion-item>
           <ion-input [(ngModel)]="user.password" label="Contraseña" type="password" labelPlacement="floating"
-            placeholder="Ingrese su contraseña">
+            placeholder="Ingrese su Contraseña">
           </ion-input>
         </ion-item>
-        <ion-button (click)="mostrarConsola()" size="small" shape="round">Conectar</ion-button><br>
-          <br>
-          <ion-button [routerLink]="['/registrarse']" shape="round" size="small">
-            Registrarse
-          </ion-button>
+        <ion-item>
+          <ion-toggle aria-label="Success toggle" color="success" [checked]="true">Recuerdame</ion-toggle>
+        </ion-item><br>
+        <ion-button (click)="enviarInformacion()" size="small" shape="round">Conectar</ion-button><br>
+        <br>
+        <ion-button [routerLink]="['/registrarse']" shape="round" size="small">
+          Redirect
+        </ion-button>
+        <h1>{{mensaje}}</h1><br>
       </ion-list>
     </ion-card-content>
   </ion-card>
