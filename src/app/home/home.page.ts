@@ -9,7 +9,7 @@ import { Router, NavigationExtras } from '@angular/router';
 export class HomePage {
 
   constructor(private router:Router) {}
-  public mensaje = "Hola soy el nuevo mensaje :3"
+  public mensaje = ""
 
   user = {
     usuario: "",
