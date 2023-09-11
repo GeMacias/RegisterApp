@@ -21,7 +21,7 @@ export class HomePage {
     let navigationExtras: NavigationExtras = {
       state: { user: this.user }
     }
-    this.router.navigate(['/registrarse'], navigationExtras);
+    this.router.navigate(['/vista-profe'], navigationExtras);
   }
   mostrarConsola() {
     console.log(this.user);

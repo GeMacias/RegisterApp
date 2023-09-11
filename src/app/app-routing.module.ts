@@ -14,6 +14,10 @@ const routes: Routes = [
     path: 'registrarse',
     loadChildren: () => import('./registrarse/registrarse.module').then( m => m.RegistrarsePageModule)
   },
+  {
+    path: 'vista-profe',
+    loadChildren: () => import('./vista-profe/vista-profe.module').then( m => m.VistaProfePageModule)
+  },
 
 ];
 
