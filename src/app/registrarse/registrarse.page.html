@@ -17,17 +17,19 @@
         slot="start" ></ion-input>
       <ion-input [(ngModel)]="informacion.apellido" type="text" expand="full" label="Apellido"
         placeholder="Ingrese su apellido" slot="start"></ion-input>
+      <ion-input  type="password" expand="full" label="Contraseña"
+        placeholder="Ingrese su Contraseña" slot="start"></ion-input>
+      <ion-input  type="password" expand="full" label="Contraseña"
+        placeholder="Confirme su Contraseña" slot="start"></ion-input>
       <ion-select [(ngModel)]="informacion.nivel" label="Ingrese su rol" interface="action-sheet"
         placeholder="Seleccione Opcion" slot="center">
         <ion-select-option value="Profesional">Profesor</ion-select-option>
-        <ion-select-option value="Universitaria">Universitari@</ion-select-option>
+        <ion-select-option value="Universitaria">Alumno/a</ion-select-option>
       </ion-select>
-      <ion-button id="present-alert">
-        Mostrar
+      <ion-button [routerLink]="['/home']" shape="round" size="small">
+        Crear Cuenta
       </ion-button>
     </ion-list>
+
   </div>
-  <ion-alert trigger="present-alert" 
-    header="Usuario"
-    subHeader="Su nombre es {{informacion.nombre}} {{informacion.apellido}}" [buttons]="alertButtons"></ion-alert>
 </ion-content>

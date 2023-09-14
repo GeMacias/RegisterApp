@@ -34,11 +34,11 @@ export class HomePage {
     .duration(5000)
     .iterations(Infinity)
     .keyframes([
-      {offset:0, transform:'translateX(-50px)',opacity:'1'},
+      {offset:0, transform:'translateX(-50px)',opacity:'0.7'},
       {offset:0.25, transform:'translateX(0px)',opacity:'1'},
-      {offset:0.50, transform:'translateX(50px)',opacity:'1'},
+      {offset:0.50, transform:'translateX(50px)',opacity:'0.7'},
       {offset:0.75, transform:'translateX(0px)',opacity:'1'},
-      {offset:1, transform:'translateX(-50px)',opacity:'1'},
+      {offset:1, transform:'translateX(-50px)',opacity:'0.7'},
     ])
   }
 
