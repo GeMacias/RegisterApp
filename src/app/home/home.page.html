@@ -3,8 +3,10 @@
 <ion-content [fullscreen]="true">
   <br><br><br>
   <div id="logo">
-    <img src="assets/img/Logo_DuocUC.png" id="avatar">
-  </div>
+    <ion-avatar id="avatar" #avatar>
+      <img alt="Silhouette of a person's head"
+        src="assets/img/logoduoc2.png" />
+    </ion-avatar>
   <br><br><br>
   <ion-card>  
     <ion-card-content id="container">
@@ -26,7 +28,11 @@
         <ion-button [routerLink]="['/registrarse']" shape="round" size="small">
           Registrarse
         </ion-button>
+        <ion-button (click)="playAvatar()" size="small" shape="round">
+          Animar
+        </ion-button>
       </ion-list>
     </ion-card-content>
   </ion-card>
+  </div>
 </ion-content>

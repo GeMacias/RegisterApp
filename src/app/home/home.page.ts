@@ -1,5 +1,8 @@
-import { Component } from '@angular/core';
+import { Component,ViewChild, ElementRef } from '@angular/core';
 import { Router, NavigationExtras } from '@angular/router';
+import { AnimationController } from '@ionic/angular';
+import type { Animation } from '@ionic/angular';
+import { IonAvatar,IonModal } from '@ionic/angular';
 
 @Component({
   selector: 'app-home',
@@ -8,7 +11,12 @@ import { Router, NavigationExtras } from '@angular/router';
 })
 export class HomePage {
 
-  constructor(private router:Router) {}
+  @ViewChild(IonAvatar,{read:ElementRef}) avatar!:ElementRef<HTMLIonAvatarElement>;
+  
+  @ViewChild(IonModal) modal!: IonModal;
+
+  private animation!:Animation;
+  constructor(private router:Router,private animationCtrl:AnimationController) {}
   public mensaje = ""
 
   user = {
@@ -16,6 +24,23 @@ export class HomePage {
     password: ""
   }
 
+  playAvatar(){
+    this.animation.play();
+  }
+
+  ngAfterViewInit() {
+    this.animation = this.animationCtrl.create()
+    .addElement(this.avatar.nativeElement)
+    .duration(5000)
+    .iterations(Infinity)
+    .keyframes([
+      {offset:0, transform:'translateX(-50px)',opacity:'1'},
+      {offset:0.25, transform:'translateX(0px)',opacity:'1'},
+      {offset:0.50, transform:'translateX(50px)',opacity:'1'},
+      {offset:0.75, transform:'translateX(0px)',opacity:'1'},
+      {offset:1, transform:'translateX(-50px)',opacity:'1'},
+    ])
+  }
 
   enviarInformacion() {
     let navigationExtras: NavigationExtras = {
