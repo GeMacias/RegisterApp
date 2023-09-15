@@ -3,6 +3,7 @@ import { Router, NavigationExtras } from '@angular/router';
 import { AnimationController } from '@ionic/angular';
 import type { Animation } from '@ionic/angular';
 import { IonAvatar,IonModal } from '@ionic/angular';
+import { AlertController } from '@ionic/angular';
 
 @Component({
   selector: 'app-home',
@@ -16,7 +17,7 @@ export class HomePage {
   @ViewChild(IonModal) modal!: IonModal;
 
   private animation!:Animation;
-  constructor(private router:Router,private animationCtrl:AnimationController) {}
+  constructor(private router:Router,private animationCtrl:AnimationController,private alertController: AlertController) {}
   public mensaje = ""
 
   user = {
@@ -26,6 +27,31 @@ export class HomePage {
 
   playAvatar(){
     this.animation.play();
+  }
+
+  async vistaProfe(){
+    let error: string = '';
+
+    if (!this.user.usuario){
+      error = "Ingrese nombre de Usuario"
+    }
+    else if (!this.user.password){
+      error="Ingrese Contraseña"
+    }
+    else{
+      let navigationExtras: NavigationExtras = {
+        state: { user: this.user }
+      }
+      this.router.navigate(['/vista-profe'], navigationExtras);
+      return
+    }
+    const alert = await this.alertController.create({
+      header: 'Error al inicial sesión',
+      message: error,
+      buttons: ['OK'],
+    });
+
+    await alert.present();
   }
 
   ngAfterViewInit() {
@@ -42,12 +68,7 @@ export class HomePage {
     ])
   }
 
-  enviarInformacion() {
-    let navigationExtras: NavigationExtras = {
-      state: { user: this.user }
-    }
-    this.router.navigate(['/vista-profe'], navigationExtras);
-  }
+  
   mostrarConsola() {
     console.log(this.user);
     if (this.user.usuario != "" && this.user.password != "") {
