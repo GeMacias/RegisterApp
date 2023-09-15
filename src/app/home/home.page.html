@@ -12,7 +12,7 @@
     <ion-card-content id="container">
       <ion-list>
         <ion-item>
-          <ion-input [(ngModel)]="user.usuario" label="Nombre Usuario" labelPlacement="floating"
+          <ion-input [(ngModel)]="user.usuario" (click)="playAvatar()"label="Nombre Usuario" labelPlacement="floating"
             placeholder="Ingrese su Usuario"></ion-input>
         </ion-item>
         <ion-item>
@@ -21,14 +21,11 @@
           </ion-input>
         </ion-item>
         <br>
-        <ion-button (click)="vistaProfe()"    shape="round">Conectar</ion-button><p><a>Recuperar contraseña</a></p>
+        <ion-button (click)="vistaProfe()"    shape="round">Conectar</ion-button><br><a [routerLink]="['/recuperar-password']">Recuperar contraseña</a>
+        <br>
         <br>
         <ion-button [routerLink]="['/registrarse']" size="small" shape="round" >
           Crear Cuenta
-        </ion-button>
-        <br>
-        <ion-button (click)="playAvatar()" size="small" shape="round">
-          Animar
         </ion-button>
       </ion-list>
     </ion-card-content>

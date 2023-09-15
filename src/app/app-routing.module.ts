@@ -18,6 +18,10 @@ const routes: Routes = [
     path: 'vista-profe',
     loadChildren: () => import('./vista-profe/vista-profe.module').then( m => m.VistaProfePageModule)
   },
+  {
+    path: 'recuperar-password',
+    loadChildren: () => import('./recuperar-password/recuperar-password.module').then( m => m.RecuperarPasswordPageModule)
+  },
 
 ];
 
