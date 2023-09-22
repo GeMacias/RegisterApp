@@ -4,6 +4,7 @@ import { AnimationController } from '@ionic/angular';
 import type { Animation } from '@ionic/angular';
 import { IonAvatar,IonModal } from '@ionic/angular';
 import { AlertController } from '@ionic/angular';
+import { AutentificarService } from '../Servicios/autentificar.service';
 
 @Component({
   selector: 'app-home',
@@ -17,7 +18,7 @@ export class HomePage {
   @ViewChild(IonModal) modal!: IonModal;
 
   private animation!:Animation;
-  constructor(private router:Router,private animationCtrl:AnimationController,private alertController: AlertController) {}
+  constructor(private auth:AutentificarService,private router:Router,private animationCtrl:AnimationController,private alertController: AlertController) {}
   public mensaje = ""
 
   user = {
@@ -39,10 +40,14 @@ export class HomePage {
       error="Ingrese Contraseña"
     }
     else{
-      let navigationExtras: NavigationExtras = {
-        state: { user: this.user }
-      }
-      this.router.navigate(['/vista-profe'], navigationExtras);
+      this.auth.login(this.user.usuario, this.user.password).then(()=>{
+        if(this.auth.activo){
+          let navigationExtras: NavigationExtras = {
+            state: { user: this.user }
+          }
+          this.router.navigate(['/vista-profe'], navigationExtras);
+        }
+      })
       return
     }
     const alert = await this.alertController.create({

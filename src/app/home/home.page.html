@@ -16,7 +16,7 @@
             placeholder="Ingrese su Usuario"></ion-input>
         </ion-item>
         <ion-item>
-          <ion-input [(ngModel)]="user.password" label="Contraseña" type="password" labelPlacement="floating"
+          <ion-input [(ngModel)]="user.password" (click)="playAvatar()" label="Contraseña" type="password" labelPlacement="floating"
             placeholder="Ingrese su Contraseña">
           </ion-input>
         </ion-item>
