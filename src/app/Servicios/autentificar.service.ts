@@ -5,7 +5,6 @@ import {Route} from '@angular/router';
 interface User{
   username:string;
   password:string;
-  rol: string;
 }
 
 
@@ -25,14 +24,14 @@ export class AutentificarService {
     this.local = global;
    }
 
-   async register(username:string, password:string, rol:string):Promise<Boolean>{
+   async register(username:string, password:string):Promise<Boolean>{
     const users = await this.local.get('users') || [];
     const user = users.find((us:User) => us.username===username)
     if(user){
       console.log("usuario existente");
       return true;
     }else{
-      const nuevo:User = {username,password,rol};
+      const nuevo:User = {username,password};
       user.push(nuevo);
       await this.local.set('user',users)
       console.log("Registro Existoso");
