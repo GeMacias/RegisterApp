@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, NavigationExtras, ActivatedRoute } from '@angular/router';
+import { User, UserRegister } from '../Servicios/user';
+import { DbService } from '../Servicios/db.service';
+
 
 @Component({
   selector: 'app-registrarse',
@@ -8,18 +11,26 @@ import { Router, NavigationExtras, ActivatedRoute } from '@angular/router';
 })
 export class RegistrarsePage implements OnInit {
 
-  constructor(private router: Router, private activatedRouter: ActivatedRoute) { }
+  constructor(private router: Router,
+     private activatedRouter: ActivatedRoute,
+     private dbService: DbService) { }
 
   public alertButtons = ['OK'];
+  
   public user = {
     usuario: "",
     password: ""
   }
-  public informacion = {
-    nombre: "",
-    apellido: "",
-    nivel: "",
-    fecha: ""
+  
+  public informacion: UserRegister = {
+    username: "",
+    email: "",
+    password: "",
+    
+  }
+
+  registrarUsuario(userRegister: UserRegister) {
+    this.dbService.register(userRegister)
   }
 
   ngOnInit() {

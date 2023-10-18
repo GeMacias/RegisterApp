@@ -6,9 +6,8 @@
 
 <ion-content [fullscreen]="true">
   <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">Bienvenido</ion-title>
-    </ion-toolbar>
   </ion-header>
-  <ion-label>Bienvenido usuario: {{user.usuario}}</ion-label><br><br>
+  <ion-label>Bienvenido : {{session.user}}  </ion-label><br><br>
+  <ion-button [routerLink]="['/vista-profe']">Profesor </ion-button>
+  <ion-button [routerLink]="['/vista-alumno']">Alumno</ion-button>
 </ion-content>

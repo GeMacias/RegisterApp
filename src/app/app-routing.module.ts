@@ -8,6 +8,10 @@ const routes: Routes = [
     loadChildren: () => import('./home/home.module').then( m => m.HomePageModule)
   },
   {
+    path: 'login',
+    loadChildren: () => import('./login/login.module').then( m => m.LoginPageModule)
+  },
+  {
     path: '',
     redirectTo: 'home',
     pathMatch: 'full'
@@ -18,7 +22,6 @@ const routes: Routes = [
   },
   {
     path: 'vista-profe',
-    canActivate:[DbService],
     loadChildren: () => import('./vista-profe/vista-profe.module').then( m => m.VistaProfePageModule)
   },
   {
@@ -27,15 +30,11 @@ const routes: Routes = [
   },
   {
     path: 'vista-alumno',
-    canActivate:[DbService],
     loadChildren: () => import('./vista-alumno/vista-alumno.module').then( m => m.VistaAlumnoPageModule)
   },
   {
     path: '**',
     loadChildren: () => import('./pagerror/pagerror.module').then( m => m.PagerrorPageModule)
-  },  {
-    path: 'login',
-    loadChildren: () => import('./login/login.module').then( m => m.LoginPageModule)
   },
 
 

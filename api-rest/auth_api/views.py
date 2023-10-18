@@ -21,6 +21,7 @@ class SignUp(APIView):
             serializer.save()
             user = User.objects.get(username=request.data['username'])
             user.set_password(request.data["password"])
+            user.save()
             token = Token.objects.create(user=user)
             return Response({"token": token.key, "username": request.data["username"]})
         return Response(serializer.errors, status.HTTP_400_BAD_REQUEST)

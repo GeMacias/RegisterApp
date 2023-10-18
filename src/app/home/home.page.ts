@@ -5,6 +5,8 @@ import type { Animation } from '@ionic/angular';
 import { IonAvatar,IonModal } from '@ionic/angular';
 import { AlertController } from '@ionic/angular';
 import { AutentificarService } from '../Servicios/autentificar.service';
+import { User } from '../Servicios/user'; 
+import { DbService } from '../Servicios/db.service';
 
 @Component({
   selector: 'app-home',
@@ -18,11 +20,17 @@ export class HomePage {
   @ViewChild(IonModal) modal!: IonModal;
 
   private animation!:Animation;
-  constructor(private auth:AutentificarService,private router:Router,private animationCtrl:AnimationController,private alertController: AlertController) {}
-  public mensaje = ""
+  constructor(
+    private auth:AutentificarService,
+    private router:Router,
+    private animationCtrl:AnimationController,
+    private alertController: AlertController,
+    private dbService: DbService) {}
+ 
+    public mensaje = ""
 
-  user = {
-    usuario: "",
+  user: User = {
+    username: "",
     password: ""
   }
 
@@ -30,30 +38,8 @@ export class HomePage {
     this.animation.play();
   }
 
-  async login(){
-    let error: string = '';
-
-    if (!this.user.usuario){
-      error = "Ingrese nombre de Usuario"
-    }
-    else if (!this.user.password){
-      error="Ingrese Contraseña"
-    }
-    else{
-      let navigationExtras: NavigationExtras = {
-        state: { user: this.user }
-      }
-      this.router.navigate(['/login'], navigationExtras);
-      
-      return
-    }
-    const alert = await this.alertController.create({
-      header: 'Error al inicial sesión',
-      message: error,
-      buttons: ['OK'],
-    });
-
-    await alert.present();
+  ingresarUsuario(user: User) {
+    this.dbService.login(user)
   }
 
   ngAfterViewInit() {
@@ -73,11 +59,12 @@ export class HomePage {
   
   mostrarConsola() {
     console.log(this.user);
-    if (this.user.usuario != "" && this.user.password != "") {
+    if (this.user.username != "" && this.user.password != "") {
       this.mensaje = "Usuario Conectado";
     } else {
       this.mensaje = "Usuario y contraseña deben tener algun valor"
     }
   }
+
 
 }

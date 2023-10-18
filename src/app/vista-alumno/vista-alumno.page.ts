@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-
+import { DbService } from '../Servicios/db.service';
 @Component({
   selector: 'app-vista-alumno',
   templateUrl: './vista-alumno.page.html',
@@ -7,9 +7,10 @@ import { Component, OnInit } from '@angular/core';
 })
 export class VistaAlumnoPage implements OnInit {
 
-  constructor() { }
+  constructor(private dbService: DbService) { }
 
   ngOnInit() {
   }
 
+  session=this.dbService.session
 }
