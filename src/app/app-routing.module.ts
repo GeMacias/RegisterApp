@@ -33,7 +33,11 @@ const routes: Routes = [
   {
     path: '**',
     loadChildren: () => import('./pagerror/pagerror.module').then( m => m.PagerrorPageModule)
+  },  {
+    path: 'login',
+    loadChildren: () => import('./login/login.module').then( m => m.LoginPageModule)
   },
+
 
 ];
 

@@ -30,7 +30,7 @@ export class HomePage {
     this.animation.play();
   }
 
-  async vistaProfe(){
+  async login(){
     let error: string = '';
 
     if (!this.user.usuario){
@@ -43,7 +43,7 @@ export class HomePage {
       let navigationExtras: NavigationExtras = {
         state: { user: this.user }
       }
-      this.router.navigate(['/vista-profe'], navigationExtras);
+      this.router.navigate(['/login'], navigationExtras);
       
       return
     }
