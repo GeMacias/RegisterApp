@@ -1,0 +1,4 @@
+Primero instalar django: pip install django
+segundo instlar esto: pip install djangorestframework
+Tercero esto: pip install django-cors-headers
+Cuarto iniciar: py manage.py runserver
