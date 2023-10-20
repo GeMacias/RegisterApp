@@ -8,6 +8,15 @@
   <ion-header collapse="condense">
   </ion-header>
   <ion-label>Bienvenido : {{session.user}}  </ion-label><br><br>
+  <h1>Cómo te identificamos?</h1>
   <ion-button [routerLink]="['/vista-profe']">Profesor </ion-button>
   <ion-button [routerLink]="['/vista-alumno']">Alumno</ion-button>
+  <br>
+  <br>
+  <br>
+  <ion-button [routerLink]="['/home']">Cerrar sesión</ion-button> <ion-avatar id="avatar" #avatar>
+    <img alt="Silhouette of a person's head"
+      src="assets/img/logoduoc4.png" />
+  </ion-avatar>
+
 </ion-content>
