@@ -1,14 +1,18 @@
 import { NgModule } from '@angular/core';
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
 import { DbService } from './Servicios/db.service';
+import { AuthGuard } from './Servicios/auth.guard';
+import { HomeGuard } from './home/home.guard';
 
 const routes: Routes = [
   {
     path: 'home',
+    canActivate: [HomeGuard],
     loadChildren: () => import('./home/home.module').then( m => m.HomePageModule)
   },
   {
     path: 'login',
+    canActivate: [AuthGuard],
     loadChildren: () => import('./login/login.module').then( m => m.LoginPageModule)
   },
   {
@@ -22,6 +26,7 @@ const routes: Routes = [
   },
   {
     path: 'vista-profe',
+    canActivate: [AuthGuard],
     loadChildren: () => import('./vista-profe/vista-profe.module').then( m => m.VistaProfePageModule)
   },
   {
@@ -30,6 +35,7 @@ const routes: Routes = [
   },
   {
     path: 'vista-alumno',
+    canActivate: [AuthGuard],
     loadChildren: () => import('./vista-alumno/vista-alumno.module').then( m => m.VistaAlumnoPageModule)
   },
   {

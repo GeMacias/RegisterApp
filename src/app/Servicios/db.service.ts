@@ -41,8 +41,5 @@ export class DbService {
       } 
     });
   }
-  canActivate(){
-    this.router.navigate(['home']);
-    return true;
-  }
+ 
 }
