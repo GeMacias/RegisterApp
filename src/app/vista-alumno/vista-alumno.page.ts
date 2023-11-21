@@ -11,6 +11,4 @@ export class VistaAlumnoPage implements OnInit {
 
   ngOnInit() {
   }
-
-  session=this.dbService.session
 }

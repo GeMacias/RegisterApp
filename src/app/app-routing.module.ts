@@ -1,24 +1,20 @@
 import { NgModule } from '@angular/core';
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
-import { DbService } from './Servicios/db.service';
 import { AuthGuard } from './Servicios/auth.guard';
-import { HomeGuard } from './home/home.guard';
 
 const routes: Routes = [
   {
     path: 'home',
-    canActivate: [HomeGuard],
     loadChildren: () => import('./home/home.module').then( m => m.HomePageModule)
-  },
-  {
-    path: 'login',
-    canActivate: [AuthGuard],
-    loadChildren: () => import('./login/login.module').then( m => m.LoginPageModule)
   },
   {
     path: '',
     redirectTo: 'home',
     pathMatch: 'full'
+  },
+  {
+    path: 'login',
+    loadChildren: () => import('./login/login.module').then(m => m.LoginPageModule)
   },
   {
     path: 'registrarse',

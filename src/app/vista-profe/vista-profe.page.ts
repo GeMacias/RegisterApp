@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, NavigationExtras, ActivatedRoute } from '@angular/router';
-import { DbService } from '../Servicios/db.service';
+
 @Component({
   selector: 'app-vista-profe',
   templateUrl: './vista-profe.page.html',
@@ -9,21 +9,18 @@ import { DbService } from '../Servicios/db.service';
 export class VistaProfePage implements OnInit {
 
   constructor(private router: Router, 
-    private activatedRouter: ActivatedRoute,
-    private dbService: DbService) { }
+    private activatedRouter: ActivatedRoute,) { }
   
-  public user = {
-    usuario: "",
-    password: ""
-  }
-
-  session=this.dbService.session
+    public user = {
+      username: "",
+      password: ""
+    }
   
   ngOnInit() {
-    this.activatedRouter.queryParams.subscribe(()=> {
-      let state= this.router.getCurrentNavigation()?.extras.state;
-      if (state){
-        this.user.usuario = state['user'].usuario;
+    this.activatedRouter.queryParams.subscribe(() => {
+      let state = this.router.getCurrentNavigation()?.extras.state;
+      if (state) {
+        this.user.username = state['user'].username;
         this.user.password = state['user'].password;
         console.log(this.user);
       }

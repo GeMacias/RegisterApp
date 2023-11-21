@@ -6,7 +6,6 @@ import { IonAvatar,IonModal } from '@ionic/angular';
 import { AlertController } from '@ionic/angular';
 import { AutentificarService } from '../Servicios/autentificar.service';
 import { User } from '../Servicios/user'; 
-import { DbService } from '../Servicios/db.service';
 
 @Component({
   selector: 'app-home',
@@ -24,10 +23,10 @@ export class HomePage {
     private auth:AutentificarService,
     private router:Router,
     private animationCtrl:AnimationController,
-    private alertController: AlertController,
-    private dbService: DbService) {}
+    private alertController: AlertController,) {}
  
     public mensaje = ""
+    public estado: String = "";
 
   user: User = {
     username: "",
@@ -38,9 +37,6 @@ export class HomePage {
     this.animation.play();
   }
 
-  ingresarUsuario(user: User) {
-    this.dbService.login(user)
-  }
 
   ngAfterViewInit() {
     this.animation = this.animationCtrl.create()
@@ -54,6 +50,34 @@ export class HomePage {
       {offset:0.75,opacity:'0.5'},
       {offset:1,opacity:'1'},
     ])
+  }
+
+  enviarInformacion() {
+    this.auth.login(this.user.username, this.user.password).then(() => {
+      if (this.auth.autenticado) {
+        let navigationExtras: NavigationExtras = {
+          state: { user: this.user }
+        }
+        this.router.navigate(['/login'], navigationExtras);
+      } else {
+        this.mensaje = "Debe ingresar sus credenciales";
+      }
+    });
+  }
+
+  cancel() {
+    this.modal.dismiss(null, 'cancel');
+  }
+
+  confirm() {
+    this.auth.register(this.user.username, this.user.password).then((res) => {
+      if (res) {
+        this.estado = "Usuario Existente";
+      } else {
+        this.mensaje = "Registro Exitoso";
+        this.modal.dismiss(this.user.username, 'confirm');
+      }
+    })
   }
 
   

@@ -1,8 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, NavigationExtras, ActivatedRoute } from '@angular/router';
-import { DbService } from '../Servicios/db.service';
-
-
 
 @Component({
   selector: 'app-login',
@@ -12,23 +9,19 @@ import { DbService } from '../Servicios/db.service';
 export class LoginPage implements OnInit {
 
   constructor(private router: Router, 
-    private activatedRouter: ActivatedRoute,
-    private dbService: DbService) { }
+    private activatedRouter: ActivatedRoute,) { }
 
+  public alertButtons = ['OK'];
   public user = {
-    usuario: "",
+    username: "",
     password: ""
   }
 
-  session=this.dbService.session
-
-
-
   ngOnInit() {
-    this.activatedRouter.queryParams.subscribe(()=> {
-      let state= this.router.getCurrentNavigation()?.extras.state;
-      if (state){
-        this.user.usuario = state['user'].usuario;
+    this.activatedRouter.queryParams.subscribe(() => {
+      let state = this.router.getCurrentNavigation()?.extras.state;
+      if (state) {
+        this.user.username = state['user'].username;
         this.user.password = state['user'].password;
         console.log(this.user);
       }
