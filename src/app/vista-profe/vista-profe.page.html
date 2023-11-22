@@ -8,4 +8,14 @@
   <ion-header collapse="condense">
   </ion-header>
   <ion-label>Bienvenido profesor: {{user.username}}</ion-label><br><br>
+  <qrcode 
+  [qrdata]="qrCodeString" 
+  [width]="256" 
+  [errorCorrectionLevel]="'M'"></qrcode>
+
+  <ion-button (click)="startScan()"   class="celeste"  shape="round">Conectar</ion-button>
+  <ion-item *ngIf="scanResult">
+    <ion-label class="ion-text-wrap">Reslutado:{{scanResult}}</ion-label>
+  </ion-item>
+
 </ion-content>

@@ -7,13 +7,15 @@ import { IonicModule } from '@ionic/angular';
 import { VistaProfePageRoutingModule } from './vista-profe-routing.module';
 
 import { VistaProfePage } from './vista-profe.page';
+import { QRCodeModule } from 'angularx-qrcode';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    VistaProfePageRoutingModule
+    VistaProfePageRoutingModule,
+    QRCodeModule,
   ],
   declarations: [VistaProfePage]
 })
