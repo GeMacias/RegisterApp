@@ -42,7 +42,7 @@ export class AutentificarService {
     }
   }
 
-  async login(username: string, password: string): Promise<boolean> {
+  async login(username: string, password: string, rol:string): Promise<boolean> {
     const users: User[] = (await this.local.get('users')) || [];
     const user = users.find((us: User) => us.username === username && us.password === password);
     if (user) {

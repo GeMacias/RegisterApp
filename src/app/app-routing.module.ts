@@ -17,22 +17,8 @@ const routes: Routes = [
     loadChildren: () => import('./login/login.module').then(m => m.LoginPageModule)
   },
   {
-    path: 'registrarse',
-    loadChildren: () => import('./registrarse/registrarse.module').then( m => m.RegistrarsePageModule)
-  },
-  {
-    path: 'vista-profe',
-    canActivate: [AuthGuard],
-    loadChildren: () => import('./vista-profe/vista-profe.module').then( m => m.VistaProfePageModule)
-  },
-  {
     path: 'recuperar-password',
     loadChildren: () => import('./recuperar-password/recuperar-password.module').then( m => m.RecuperarPasswordPageModule)
-  },
-  {
-    path: 'vista-alumno',
-    canActivate: [AuthGuard],
-    loadChildren: () => import('./vista-alumno/vista-alumno.module').then( m => m.VistaAlumnoPageModule)
   },
   {
     path: '**',

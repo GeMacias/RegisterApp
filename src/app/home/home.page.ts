@@ -5,8 +5,6 @@ import type { Animation } from '@ionic/angular';
 import { IonAvatar,IonModal } from '@ionic/angular';
 import { AlertController } from '@ionic/angular';
 import { AutentificarService } from '../Servicios/autentificar.service';
-import { User } from '../Servicios/user'; 
-
 @Component({
   selector: 'app-home',
   templateUrl: 'home.page.html',
@@ -28,10 +26,13 @@ export class HomePage {
     public mensaje = ""
     public estado: String = "";
 
-  user: User = {
-    username: "",
-    password: ""
-  }
+    public user = {
+      username: "",
+      password: "",
+      rol:""
+    }
+
+    
 
   playAvatar(){
     this.animation.play();
@@ -53,7 +54,7 @@ export class HomePage {
   }
 
   enviarInformacion() {
-    this.auth.login(this.user.username, this.user.password).then(() => {
+    this.auth.login(this.user.username, this.user.password, this.user.rol).then(() => {
       if (this.auth.autenticado) {
         let navigationExtras: NavigationExtras = {
           state: { user: this.user }

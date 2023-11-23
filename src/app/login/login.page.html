@@ -7,13 +7,32 @@
 <ion-content [fullscreen]="true">
   <ion-header collapse="condense">
   </ion-header>
-  <ion-label> <b>Bienvenido : </b> <b>{{user.username}}</b>  </ion-label><br><br>
-  <h1><b>Cómo te identificamos?</b></h1>
-  <ion-button [routerLink]="['/vista-profe']" class="celeste">Profesor </ion-button>
-  <ion-button [routerLink]="['/vista-alumno']" class="celeste">Alumno</ion-button>
-  <br>
-  <br>
-  <br>
-  <ion-button [routerLink]="['/home']" class="celeste">Cerrar sesión</ion-button>
+  
+  <div class="container">
+    <ion-avatar id="avatar" #avatar>
+      <img alt="Silhouette of a person's head"
+        src="assets/img/logoduoc4.png" /> 
+    </ion-avatar><br><br>
+    <ion-label> <b>Bienvenido/a : </b> <b>{{user.rol}} {{user.username}} </b>  </ion-label><br>
+    <h1><b>Registro de Asistencia</b></h1>
+    <ion-button id="open-modal" class="celeste">Generar QR </ion-button><br><br>
+    <ion-button class="celeste">Asistencia </ion-button><br><br>
+    <ion-button [routerLink]="['/home']" class="celeste">Cerrar sesión</ion-button>
+  </div>
+  
 
+  <ion-modal trigger="open-modal">
+    <ng-template>
+      <ion-header>
+        <ion-toolbar>
+          <ion-buttons slot="start">
+            <ion-button (click)="cancel()">Salir</ion-button>
+          </ion-buttons>
+          <ion-title>Asistencia</ion-title>
+        </ion-toolbar>
+      </ion-header>
+      <ion-content class="ion-padding">
+      </ion-content>
+    </ng-template>
+  </ion-modal>
 </ion-content>
