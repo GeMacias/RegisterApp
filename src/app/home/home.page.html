@@ -1,36 +1,17 @@
-
-
-<ion-content [fullscreen]="true">
-  <br><br><br>
-  <div id="logo">
-    <ion-avatar id="avatar" #avatar>
-      <img alt="Silhouette of a person's head"
-        src="assets/img/logoduoc4.png" />
-    </ion-avatar>
-  <br><br><br>
-  <ion-card>  
-    <ion-card-content id="container">
-      <ion-list>
-        <ion-item>
-          <ion-input [(ngModel)]="user.username" (click)="playAvatar()"label="Nombre Usuario" labelPlacement="floating"
-            placeholder="Ingrese su Usuario"></ion-input>
-        </ion-item>
-        <ion-item>
-          <ion-input [(ngModel)]="user.password" (click)="playAvatar()" label="Contraseña" type="password" labelPlacement="floating"
-            placeholder="Ingrese su Contraseña">
-          </ion-input>
-        </ion-item>
-        <br>
-        <ion-button (click)="ingresarUsuario(user)"  class="celeste"  shape="round">Conectar</ion-button>
-        <br>
-        <a [routerLink]="['/recuperar-password']">Recuperar contraseña</a>
-        <br>
-        <br>
-        <ion-button [routerLink]="['/registrarse']" class="celeste" size="small" shape="round" >
-          Crear Cuenta
-        </ion-button>
-      </ion-list>
-    </ion-card-content>
-  </ion-card>
-  </div>
+<ion-content>
+  <ion-list>
+    <ion-item *ngFor="let curso of cursos">
+      <ion-label>
+        <h2>Nombre: {{ curso.nombre }}</h2>
+        <h3>ID: {{ curso.id }}</h3>
+        <h3>Código: {{ curso.codigo }}</h3>
+        <h3>Sección: {{ curso.seccion }}</h3>
+      </ion-label>
+      <ion-button 
+        fill="outline" 
+        slot="end" (click)="verDetalleCurso(curso.id)">
+        Ver Detalle
+      </ion-button>
+    </ion-item>
+  </ion-list>
 </ion-content>

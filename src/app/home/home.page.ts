@@ -1,69 +1,47 @@
-import { Component,ViewChild, ElementRef } from '@angular/core';
-import { Router, NavigationExtras } from '@angular/router';
-import { AnimationController } from '@ionic/angular';
-import type { Animation } from '@ionic/angular';
-import { IonAvatar,IonModal } from '@ionic/angular';
-import { AlertController } from '@ionic/angular';
-import { AutentificarService } from '../Servicios/autentificar.service';
-import { User } from '../Servicios/user'; 
-import { DbService } from '../Servicios/db.service';
+import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute, Router,NavigationExtras } from "@angular/router";
+import { ConsumoapiService } from '../services/consumoapi.service';
 
 @Component({
   selector: 'app-home',
   templateUrl: 'home.page.html',
   styleUrls: ['home.page.scss'],
 })
-export class HomePage {
+export class HomePage implements OnInit {
 
-  @ViewChild(IonAvatar,{read:ElementRef}) avatar!:ElementRef<HTMLIonAvatarElement>;
-  
-  @ViewChild(IonModal) modal!: IonModal;
+  userHome: any;
+  pass: any;
+  value = "dcaresg";
+  idProfesor : any;
 
-  private animation!:Animation;
-  constructor(
-    private auth:AutentificarService,
-    private router:Router,
-    private animationCtrl:AnimationController,
-    private alertController: AlertController,
-    private dbService: DbService) {}
- 
-    public mensaje = ""
+  cursos: any[] = [];
 
-  user: User = {
-    username: "",
-    password: ""
+  constructor(private activeroute: ActivatedRoute, private router: Router, private apiService : ConsumoapiService) {
+    this.activeroute.queryParams.subscribe(params => {
+      if (this.router.getCurrentNavigation()?.extras.state) {
+        this.userHome = this.router.getCurrentNavigation()?.extras.state?.['user'];
+        this.idProfesor = this.router.getCurrentNavigation()?.extras.state?.['id'];
+      }
+    });
+
   }
 
-  playAvatar(){
-    this.animation.play();
-  }
+  verDetalleCurso(cursoId: number) {
+    let setData: NavigationExtras = {
+      state: {
+        idProfesor: this.idProfesor,
+        idCurso : cursoId        
+      }
+    };
+    this.router.navigate(['/detallecurso'],setData);
+}
 
-  ingresarUsuario(user: User) {
-    this.dbService.login(user)
-  }
 
-  ngAfterViewInit() {
-    this.animation = this.animationCtrl.create()
-    .addElement(this.avatar.nativeElement)
-    .duration(5000)
-    .iterations(Infinity)
-    .keyframes([
-      {offset:0,opacity:'1'},
-      {offset:0.25,opacity:'0.5'},
-      {offset:0.50,opacity:'0.1'},
-      {offset:0.75,opacity:'0.5'},
-      {offset:1,opacity:'1'},
-    ])
-  }
-
-  
-  mostrarConsola() {
-    console.log(this.user);
-    if (this.user.username != "" && this.user.password != "") {
-      this.mensaje = "Usuario Conectado";
-    } else {
-      this.mensaje = "Usuario y contraseña deben tener algun valor"
-    }
+  ngOnInit() {
+    this.apiService.obtenerCursosPorProfesor(this.idProfesor).subscribe(data => {
+      this.cursos = data;
+      console.log(this.cursos);
+    });
   }
 
 

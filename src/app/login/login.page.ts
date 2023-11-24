@@ -1,8 +1,17 @@
-import { Component, OnInit } from '@angular/core';
-import { Router, NavigationExtras, ActivatedRoute } from '@angular/router';
-import { DbService } from '../Servicios/db.service';
 
-
+import { FormControl,FormGroup,Validators   } from '@angular/forms';
+import { Router,NavigationExtras } from '@angular/router';
+import { AnimationController, IonCard } from '@ionic/angular';
+import type { Animation } from '@ionic/angular';
+import type { QueryList } from '@angular/core';
+import { Component,OnInit, ElementRef, ViewChildren, ViewChild } from '@angular/core';
+import { usuario } from '../modelo/usuario';
+import { perfil } from '../modelo/perfil';
+import { curso } from '../modelo/curso';
+import { AuthGuard } from '../guard/auth.guard';
+import { ConsumoapiService } from '../services/consumoapi.service';
+import { AlertController } from '@ionic/angular';
+import { IonAvatar,IonModal } from '@ionic/angular';
 
 @Component({
   selector: 'app-login',
@@ -10,28 +19,99 @@ import { DbService } from '../Servicios/db.service';
   styleUrls: ['./login.page.scss'],
 })
 export class LoginPage implements OnInit {
+  @ViewChild(IonCard, { read: ElementRef }) card!: ElementRef<HTMLIonCardElement>;
+  @ViewChild(IonAvatar,{read:ElementRef}) avatar!:ElementRef<HTMLIonAvatarElement>;
 
-  constructor(private router: Router, 
-    private activatedRouter: ActivatedRoute,
-    private dbService: DbService) { }
+  private animation!: Animation;
+  private typeuser!: usuario;
+  private typePerfil!: perfil;
+  private curso!:curso;
 
-  public user = {
-    usuario: "",
-    password: ""
+  textBtn = "INGRESAR";
+  textUser = "Usuario";
+  textPass = "Contraseña";
+  desUser = "ingrese usuario";
+  desPass = "ingrese contraseña";
+
+
+
+    usuario = new FormGroup({
+    user: new FormControl('',[Validators.required, Validators.minLength(4),Validators.maxLength(20)]),
+    pass: new FormControl('',[Validators.required, Validators.minLength(4),Validators.maxLength(20)]),
+  });
+
+  apiLogin() {
+    this.consumoapi.login(this.usuario.value.user!, this.usuario.value.pass!).subscribe(
+      (response) => {
+        this.typeuser = response.body as unknown as usuario;
+        console.log("bbb" + response.status);
+        if (response.status == 200) {
+          let setData: NavigationExtras = {
+            state: {
+              id: this.typeuser.id,
+              user: this.typeuser.user,
+              correo: this.typeuser.correo,
+              nombre: this.typeuser.nombre,
+              tipoPerfil: this.typeuser.tipoPerfil
+            }
+          };
+
+          console.log("aaas"+this.typeuser.tipoPerfil);
+
+          if (this.typeuser.tipoPerfil === 1) {
+            this.auth.setAuthenticationStatus(true);
+            this.router.navigate(['/home'], setData);
+          }
+
+          if (this.typeuser.tipoPerfil === 2) {
+            this.auth.setAuthenticationStatus(true);
+            this.router.navigate(['/homaalumno'], setData);
+          }
+        }
+
+        if (response.status === 401) {
+          this.presentAlert();
+
+        }
+      },
+      (error) => {
+        console.error('Error en inicio de sesión:', error);
+      });
   }
 
-  session=this.dbService.session
-
-
-
-  ngOnInit() {
-    this.activatedRouter.queryParams.subscribe(()=> {
-      let state= this.router.getCurrentNavigation()?.extras.state;
-      if (state){
-        this.user.usuario = state['user'].usuario;
-        this.user.password = state['user'].password;
-        console.log(this.user);
-      }
-    })
+  async presentAlert(){
+    const alert = await this.alertController.create({
+      header: 'Error Login',
+      subHeader: 'Infomación : ',
+      message: 'Usuario o contraseña son incorrecto',
+      buttons: ['Aceptar'],
+    });
+    await alert.present();
   }
+
+
+  constructor(private router: Router,private animationCtrl: AnimationController, private auth:AuthGuard, private consumoapi:ConsumoapiService, private alertController :AlertController) {}
+
+  ngOnInit() {}
+
+  playAvatar(){
+    this.animation.play();
+  }
+
+  ngAfterViewInit() {
+    this.animation = this.animationCtrl.create()
+    .addElement(this.avatar.nativeElement)
+    .duration(5000)
+    .iterations(Infinity)
+    .keyframes([
+      {offset:0,opacity:'1'},
+      {offset:0.25,opacity:'0.5'},
+      {offset:0.50,opacity:'0.1'},
+      {offset:0.75,opacity:'0.5'},
+      {offset:1,opacity:'1'},
+    ])
+  }
+
 }
+
+

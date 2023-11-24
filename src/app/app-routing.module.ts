@@ -1,49 +1,41 @@
 import { NgModule } from '@angular/core';
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
-import { DbService } from './Servicios/db.service';
-import { AuthGuard } from './Servicios/auth.guard';
-import { HomeGuard } from './home/home.guard';
+import { AuthGuard } from './guard/auth.guard';
 
 const routes: Routes = [
   {
     path: 'home',
-    canActivate: [HomeGuard],
-    loadChildren: () => import('./home/home.module').then( m => m.HomePageModule)
-  },
-  {
-    path: 'login',
-    canActivate: [AuthGuard],
-    loadChildren: () => import('./login/login.module').then( m => m.LoginPageModule)
+    loadChildren: () => import('./home/home.module').then( m => m.HomePageModule),
+    canActivate: [AuthGuard]
   },
   {
     path: '',
-    redirectTo: 'home',
+    redirectTo: 'login',
     pathMatch: 'full'
   },
   {
-    path: 'registrarse',
-    loadChildren: () => import('./registrarse/registrarse.module').then( m => m.RegistrarsePageModule)
+    path: 'login',
+    loadChildren: () => import('./login/login.module').then( m => m.LoginPageModule)
   },
   {
-    path: 'vista-profe',
-    canActivate: [AuthGuard],
-    loadChildren: () => import('./vista-profe/vista-profe.module').then( m => m.VistaProfePageModule)
+    path: 'homaalumno',
+    loadChildren: () => import('./homaalumno/homaalumno.module').then( m => m.HomaalumnoPageModule),
+    canActivate: [AuthGuard]
+  },
+  {
+    path: 'detallecurso',
+    loadChildren: () => import('./detallecurso/detallecurso.module').then( m => m.DetallecursoPageModule),
+    canActivate: [AuthGuard]
   },
   {
     path: 'recuperar-password',
     loadChildren: () => import('./recuperar-password/recuperar-password.module').then( m => m.RecuperarPasswordPageModule)
   },
   {
-    path: 'vista-alumno',
-    canActivate: [AuthGuard],
-    loadChildren: () => import('./vista-alumno/vista-alumno.module').then( m => m.VistaAlumnoPageModule)
-  },
-  {
     path: '**',
-    loadChildren: () => import('./pagerror/pagerror.module').then( m => m.PagerrorPageModule)
-  },
-
-
+    loadChildren: () => import('./page404/page404.module').then( m => m.Page404PageModule)
+  }
+  
 ];
 
 @NgModule({
