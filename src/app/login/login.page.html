@@ -1,38 +1,31 @@
-<ion-header [translucent]="true">
-  <ion-buttons slot="start">
-    <ion-back-button></ion-back-button>
-  </ion-buttons>
-</ion-header>
+
 
 <ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-  </ion-header>
-  
-  <div class="container">
+  <br><br><br>
+  <div class="container" id="logo">
     <ion-avatar id="avatar" #avatar>
       <img alt="Silhouette of a person's head"
-        src="assets/img/logoduoc4.png" /> 
-    </ion-avatar><br><br>
-    <ion-label> <b>Bienvenido/a : </b> <b>{{user.rol}} {{user.username}} </b>  </ion-label><br>
-    <h1><b>Registro de Asistencia</b></h1>
-    <ion-button id="open-modal" class="celeste">Generar QR </ion-button><br><br>
-    <ion-button class="celeste">Asistencia </ion-button><br><br>
-    <ion-button [routerLink]="['/home']" class="celeste">Cerrar sesión</ion-button>
-  </div>
-  
+        src="assets/img/logoduoc4.png" />
+    </ion-avatar>
+  <br><br><br>
+    
+  <h1></h1>
 
-  <ion-modal trigger="open-modal">
-    <ng-template>
-      <ion-header>
-        <ion-toolbar>
-          <ion-buttons slot="start">
-            <ion-button (click)="cancel()">Salir</ion-button>
-          </ion-buttons>
-          <ion-title>Asistencia</ion-title>
-        </ion-toolbar>
-      </ion-header>
-      <ion-content class="ion-padding">
-      </ion-content>
-    </ng-template>
-  </ion-modal>
+  <form [formGroup]="usuario">
+
+    <ion-item>
+      <ion-input (click)="playAvatar()" label="{{textUser}}" labelPlacement="floating" placeholder="{{desUser}}" formControlName="user"></ion-input>
+    </ion-item>
+  
+    <ion-item>
+      <ion-input (click)="playAvatar()" label="{{textPass}}"  labelPlacement="floating" placeholder="{{desPass}}" type="password" formControlName="pass"></ion-input>
+    </ion-item>
+    <br><br>
+    <ion-button expand="block" class="celeste" [disabled]="!usuario.valid"  (click)="apiLogin()" fill="outline">{{textBtn}}</ion-button> 
+    <BR><BR>
+    <a [routerLink]="['/recuperar-password']">Recuperar contraseña</a>
+  </form>
+
+  </div>
 </ion-content>
+

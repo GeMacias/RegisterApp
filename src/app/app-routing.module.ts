@@ -1,20 +1,31 @@
 import { NgModule } from '@angular/core';
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
-import { AuthGuard } from './Servicios/auth.guard';
+import { AuthGuard } from './guard/auth.guard';
 
 const routes: Routes = [
   {
     path: 'home',
-    loadChildren: () => import('./home/home.module').then( m => m.HomePageModule)
+    loadChildren: () => import('./home/home.module').then( m => m.HomePageModule),
+    canActivate: [AuthGuard]
   },
   {
     path: '',
-    redirectTo: 'home',
+    redirectTo: 'login',
     pathMatch: 'full'
   },
   {
     path: 'login',
-    loadChildren: () => import('./login/login.module').then(m => m.LoginPageModule)
+    loadChildren: () => import('./login/login.module').then( m => m.LoginPageModule)
+  },
+  {
+    path: 'homaalumno',
+    loadChildren: () => import('./homaalumno/homaalumno.module').then( m => m.HomaalumnoPageModule),
+    canActivate: [AuthGuard]
+  },
+  {
+    path: 'detallecurso',
+    loadChildren: () => import('./detallecurso/detallecurso.module').then( m => m.DetallecursoPageModule),
+    canActivate: [AuthGuard]
   },
   {
     path: 'recuperar-password',
@@ -22,10 +33,9 @@ const routes: Routes = [
   },
   {
     path: '**',
-    loadChildren: () => import('./pagerror/pagerror.module').then( m => m.PagerrorPageModule)
-  },
-
-
+    loadChildren: () => import('./page404/page404.module').then( m => m.Page404PageModule)
+  }
+  
 ];
 
 @NgModule({

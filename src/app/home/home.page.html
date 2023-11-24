@@ -1,69 +1,17 @@
-
-
-<ion-content [fullscreen]="true">
-  <br><br><br>
-  <div id="logo">
-    <ion-avatar id="avatar" #avatar>
-      <img alt="Silhouette of a person's head"
-        src="assets/img/logoduoc4.png" />
-    </ion-avatar>
-  <br><br><br>
-  <ion-card>  
-    <ion-card-content id="container">
-      <ion-list>
-        <ion-item>
-          <ion-input [(ngModel)]="user.username" (click)="playAvatar()"label="Nombre Usuario" labelPlacement="floating"
-            placeholder="Ingrese su Usuario"></ion-input>
-        </ion-item>
-        <ion-item>
-          <ion-input [(ngModel)]="user.password" (click)="playAvatar()" label="Contraseña" type="password" labelPlacement="floating"
-            placeholder="Ingrese su Contraseña">
-          </ion-input>
-        </ion-item>
-        <br>
-        <ion-button (click)="enviarInformacion()"   class="celeste"  shape="round">Conectar</ion-button>
-        <br>
-        <a [routerLink]="['/recuperar-password']">Recuperar contraseña</a>
-        <br>
-        <br>
-        <ion-button id="open-modal" shape="round" size="small">
-          Registrarse
-        </ion-button>
-      </ion-list>
-    </ion-card-content>
-  </ion-card>
-
-  <ion-modal trigger="open-modal">
-    <ng-template>
-      <ion-header>
-        <ion-toolbar>
-          <ion-buttons slot="start">
-            <ion-button (click)="cancel()">Salir</ion-button>
-          </ion-buttons>
-          <ion-title>Registro</ion-title>
-          <ion-buttons slot="end" id="present-alert">
-            <ion-button (click)="confirm()" [strong]="true">Confirmar</ion-button>
-          </ion-buttons>
-        </ion-toolbar>
-      </ion-header>
-      <ion-content class="ion-padding">
-        <ion-item>
-          <ion-input [(ngModel)]="user.username" label="Nombre Usuario" labelPlacement="floating"
-            placeholder="Ingrese su Usuario"></ion-input>
-        </ion-item>
-        <ion-item>
-          <ion-input [(ngModel)]="user.password" label="Contraseña" type="password" labelPlacement="floating"
-            placeholder="Ingrese su Contraseña"></ion-input>
-        </ion-item>
-        <ion-item>
-          <ion-select [(ngModel)]="user.rol" label="Rol">
-            <ion-select-option value="Profesor/a">Profesor/a</ion-select-option>
-            <ion-select-option value="Alumno/a">Alumno/a</ion-select-option>
-        </ion-select>
-        </ion-item>
-        
-      </ion-content>
-    </ng-template>
-  </ion-modal>
-  </div>
+<ion-content>
+  <ion-list>
+    <ion-item *ngFor="let curso of cursos">
+      <ion-label>
+        <h2>Nombre: {{ curso.nombre }}</h2>
+        <h3>ID: {{ curso.id }}</h3>
+        <h3>Código: {{ curso.codigo }}</h3>
+        <h3>Sección: {{ curso.seccion }}</h3>
+      </ion-label>
+      <ion-button 
+        fill="outline" 
+        slot="end" (click)="verDetalleCurso(curso.id)">
+        Ver Detalle
+      </ion-button>
+    </ion-item>
+  </ion-list>
 </ion-content>
