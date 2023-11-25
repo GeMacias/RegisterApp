@@ -11,7 +11,7 @@ export class ConsumoapiService {
 
   httpOptions = { headers: new HttpHeaders({ 'Content-Type': 'application/json', 'Access-Control-Allow-Origin': '*' }) }
 
-  url: string = 'https://nt3k6gv6-5000.brs.devtunnels.ms/';
+  url: string = 'https://5hhnhvqq-5000.brs.devtunnels.ms/';
 
   public login(usuario: string, pass: string): Observable<HttpResponse<usuario>> {
     const body = {

@@ -12,49 +12,24 @@ import { AlertController } from '@ionic/angular';
 export class HomaalumnoPage {
   
   data: any;
-
+  force?: boolean;
 
   constructor(private alertController:AlertController) { 
       
   }
 
-  async checkPermission() {
-    return new Promise(async (resolve, reject) => {
-      try {
-        const status = await BarcodeScanner.checkPermission();
+  async checkPermission(){
+    // check or request permission
+    const status = await BarcodeScanner.checkPermission({ force: true });
+  
+    if (status.granted) {
+      // the user granted permission
+      return true;
+    }
+  
+    return false;
+  };
 
-        if (status.granted) {
-          resolve(true);
-        } else if (status.denied) {
-          const alert = await this.alertController.create({
-            header: 'Sin Permisos',
-            message: 'Por favor otorgue permisos de cámara en los ajustes de la aplicación',
-            buttons: [
-              {
-                text: 'No',
-                role: 'cancel',
-                handler: () => {
-                  reject('Permisos denegados');
-                },
-              },
-              {
-                text: 'Abrir ajustes',
-                handler: () => {
-                  BarcodeScanner.openAppSettings();
-                  reject('Permisos denegados');
-                },
-              },
-            ],
-          });
-
-          await alert.present();
-        }
-      } catch (error) {
-        console.error('Error al verificar permisos:', error);
-        reject(error);
-      }
-    });
-  }
   async startScan() {
     try {
       await this.checkPermission();
