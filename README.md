@@ -10,6 +10,6 @@ Para iniciar el proyecto seguir estos pasos:
   2.- Ejecutar: ionic serve
 
   Usuarios 
-  Profesor: usuario:jo.riquelme contraseña: jose123
-  alumnos: usuario: alo.barrera contraseña: alonso123
+  Profesor: -usuario:jo.riquelme -contraseña: jose123
+  alumnos: -usuario: alo.barrera -contraseña: alonso123
 
